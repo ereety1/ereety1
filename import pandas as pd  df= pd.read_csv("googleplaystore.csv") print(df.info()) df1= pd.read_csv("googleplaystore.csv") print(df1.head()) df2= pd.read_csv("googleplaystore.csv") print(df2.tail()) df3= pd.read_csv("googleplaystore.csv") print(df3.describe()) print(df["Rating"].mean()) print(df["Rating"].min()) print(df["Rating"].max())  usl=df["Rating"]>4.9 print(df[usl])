@@ -1,0 +1,15 @@
+import pandas as pd 
+df= pd.read_csv("googleplaystore.csv")
+print(df.info())
+df1= pd.read_csv("googleplaystore.csv")
+print(df1.head())
+df2= pd.read_csv("googleplaystore.csv")
+print(df2.tail())
+df3= pd.read_csv("googleplaystore.csv")
+print(df3.describe())
+print(df["Rating"].mean())
+print(df["Rating"].min())
+print(df["Rating"].max())
+
+usl=df["Rating"]>4.9
+print(df[usl])
