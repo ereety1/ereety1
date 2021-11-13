@@ -1,0 +1,85 @@
+from kivy.app import App
+from kivy.uix.behaviors import button
+from kivy.uix.button import Button
+from kivy.uix.boxlayout import BoxLayout
+from kivy.uix.screenmanager import Screen, ScreenManager
+
+
+class BackButton (Button):
+    def __init__ (self,*args , **kwargs):
+        super().__init__(text = kwargs["text"])
+        self.manager=kwargs["manager"]
+
+    def on_press_START(self,*args,**kwargs):
+        self.manager.current="1"
+    def on_press_1(self,*args,**kwargs):
+        self.manager.current="2"
+    def on_press_2(self,*args,**kwargs):
+        self.manager.current="3"
+    def on_press_3(self,*args,**kwargs):
+        self.manager.current="4"
+    def on_press_4(self,*args,**kwargs):
+        self.manager.current="5"
+    def on_press_5(self,*args,**kwargs):
+        self.manager.current="finish"
+    def on_press_finish(self,*args,**kwargs):
+        self.manager.current="start"
+
+
+class MyApp(App):
+    def build(self):
+
+        #l = BoxLayout(padding=8)
+        #l.add_widget(b1)
+        
+
+        self.manager = ScreenManager()
+        b0 = BackButton(text="start",manager=self.manager)
+        
+        
+        
+        s1=Screen(name="start")
+        s2=Screen(name="1")
+        s3=Screen(name="2")
+        s4=Screen(name="3")
+        s5=Screen(name="4")
+        s6=Screen(name="5")
+        s7=Screen(name="finish")
+
+        b1=Button(text="start")
+        b2=Button(text="1")
+        b3=Button(text="2")
+        b4=Button(text="3")
+        b5=Button(text="4")
+        b6=Button(text="5")
+        b7=Button(text="finish")
+        b1.bind(on_press = b0.on_press_START)
+        b2.bind(on_press = b0.on_press_1)
+        b3.bind(on_press = b0.on_press_2)
+        b4.bind(on_press = b0.on_press_3)
+        b5.bind(on_press = b0.on_press_4)
+        b6.bind(on_press = b0.on_press_5)
+        b7.bind(on_press = b0.on_press_finish)
+
+
+        s1.add_widget(b1)
+        s2.add_widget(b2)
+        s3.add_widget(b3)
+        s4.add_widget(b4)
+        s5.add_widget(b5)
+        s6.add_widget(b6)
+        s7.add_widget(b7)
+
+        self.manager.add_widget(s1)
+        self.manager.add_widget(s2)
+        self.manager.add_widget(s3)
+        self.manager.add_widget(s4)
+        self.manager.add_widget(s5)
+        self.manager.add_widget(s6)
+        self.manager.add_widget(s7)
+        self.manager.current = "start"
+        
+        return self.manager
+
+app = MyApp()
+app.run()
